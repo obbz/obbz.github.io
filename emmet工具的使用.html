@@ -1,0 +1,291 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+ 
+.aa{
+	
+	border:1px solid white;
+	width:200px;
+	height:270px;
+	margin-left:1050px;
+	margin-top:50px;
+}
+a{font-size:26px}
+</style>
+</head>
+<body background="53.jpg" style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed; color:white" > 
+1、生成后代元素：>      大于号表示后面要生成的内容是当前标签的后代
+命令：nav>ul>li 
+每个命令输完后按下Tab键即可快速得到代码:
+1
+2
+3
+4
+5
+<xmp>
+<nav>
+    <ul>
+        <li></li>
+    </ul>
+</nav>
+</xmp>
+2、生成兄弟元素：+     加号表示后面的元素和前面的元素是兄弟元素
+命令：div+p+bq   得到代码如下：
+1
+2
+3
+<xmp>
+<div></div>
+<p></p>
+<blockquote></blockquote>
+</xmp>
+3、生成上级元素：^   表示^后面的元素与^前面的元素的父元素是平级，即兄弟元素。一个^表示提升一个层级，两个提升两级
+命令：div+div>p>span+em^bq  得到代码如下：
+1
+2
+3
+4
+5
+<xmp>
+<div></div>
+<div>
+    <p><span></span><em></em></p>
+    <blockquote></blockquote>
+	</div>
+	</xmp>
+命令：div+div>p>span+em^^bq  得到代码如下：
+1
+2
+3
+4
+5
+<xmp>
+<div></div>
+<div>
+    <p><span></span><em></em></p>
+</div>
+<blockquote></blockquote>
+</xmp>
+4、生成类名： .    Emmet 默认的标签为 div ，如果我们不给出标签名称的话，默认就生成 div 标签。Emmet会根据父标签进行判定。比如在<xmp><ul></xmp>中输入.item，就会生成<xmp><li class="item"></li></xmp>。 
+命令：.container 得到代码如下：
+1
+<xmp>
+<div class="container"></div>
+</xmp>
+如果想生成多个类名可连续写
+命令： .container.wrapper.more  得到代码如下：
+1
+<xmp>
+<div class="container wrapper more"></div>
+</xmp>
+5、生成ID：#   
+命令：#container  得到代码如下：
+1
+<xmp>
+<div id="container"></div>
+</xmp>
+6、生成分组：()    用括号进行分组，这样可以更加明确要生成的结构，特别是层次关系
+命令：(.foo>h1)+(.bar>h2)  得到代码如下：
+1
+2
+3
+4
+5
+6
+<xmp>
+<div class="foo">
+    <h1></h1>
+</div>
+<div class="bar">
+    <h2></h2>
+</div>
+</xmp>
+7、重复生成多份：*   *号后面是想重复生成的份数
+命令：ul>li*5    得到代码如下：
+1
+2
+3
+4
+5
+6
+7<xmp>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+</xmp>
+8、对生成内容依次编号：$    $就表示一位数字，只出现一个的话，就从1开始。如果出现多个，就从0开始。如果我想生成三位数的序号，那么要写三个$
+命令：ul>li.item$*5   得到代码如下：
+1
+2
+3
+4
+5
+6
+7
+<xmp>
+<ul>
+    <li class="item1"></li>
+    <li class="item2"></li>
+    <li class="item3"></li>
+    <li class="item4"></li>
+    <li class="item5"></li>
+</ul>
+</xmp>
+只能这样单调的生成序号？对于强大的 Emmet 来说，肯定不会了，我们也可以在 $ 后面增加 @- 来实现倒序排列：
+命令：ul>li.item$@-*5  得到代码如下：
+1
+2
+3
+4
+5
+6
+7
+<xmp>
+<ul>
+    <li class="item5"></li>
+    <li class="item4"></li>
+    <li class="item3"></li>
+    <li class="item2"></li>
+    <li class="item1"></li>
+</ul>
+</xmp>
+使用 @N 指定开始的序号
+命令：ul>li.item$@3*5  得到代码如下：
+1
+2
+3
+4
+5
+6
+7
+<xmp>
+<ul>
+     <li class="item3"></li>
+     <li class="item4"></li>
+     <li class="item5"></li>
+     <li class="item6"></li>
+     <li class="item7"></li>
+</ul>
+</xmp>
+至于ul>li.item$@-3*5 生成什么你们自己琢磨吧！
+9、生成自定义属性：[attr]   中括号里面的内容是你想添加的属性
+命令：td[rowspan=2 colspan=3 title]  得到代码如下：
+1
+<xmp>
+<td rowspan="2" colspan="3" title=""></td>
+</xmp>
+10、生成文本内容：{}  大括号里面是你想添加的文本内容
+命令：a{Click me}  得到代码如下：
+1
+<xmp>
+<a href="">Click me</a>
+</xmp>
+命令：p>{Click }+a{here}+{ to continue}  得到代码如下：
+<xmp>
+<p>Click <a href="">here</a>to continue</p>
+</xmp>
+到此为止基本语法内容也就这么多，剩下的就是加强理解与练习了。
+注意：在写命令的时候，你可能为了代码的可读性，使用一些空格什么的排版一下，这将会导致代码无法使用。但是{}[]中可存在空格
+ul>li.item${item$}*3
+1
+2
+3
+4
+5
+<xmp>
+<ul>
+    <li class="item1">item1</li>
+    <li class="item2">item2</li>
+    <li class="item3">item3</li>
+</ul>
+</xmp> #content>.article>h1.ok[title=parpername][style=color:#000;]+h3.no[title=subname][style=color:#fff;]+p.words
+1
+2
+3
+4
+5
+6
+7
+<xmp>
+<div id="content">
+    <div class="article">
+        <h1 class="ok" title="papername" style="color:#000;"></h1>
+        <h3 class="no" title="subname" style="color:#fff;"></h3>
+        <p class="words"></p>
+    </div>
+</div>　
+</xmp>
+
+三、emmet在HTML与CSS中的应用
+emmet除了能快速编辑出上面的代码以外，还有一些其他代码也可快速编辑，具体的、全面的快速编辑方式，还请浏览emmet官方文档（有详细说明哦！）
+下面只列出一些常用的快速编辑方式
+<br>
+命令：link   
+ 
+1
+<xmp>
+<link rel="stylesheet" href="" />
+</xmp>
+ 
+命令：script:src
+1
+<xmp>
+<script src=""></script>
+</xmp>
+命令：img
+1
+<xmp>
+<img src="" alt="" />
+</xmp>
+命令：inp
+1
+<xmp>
+<input type="text" name="" id="" />
+</xmp>
+命令：input:p
+1
+<xmp>
+<input type="password" name="" id="">
+</xmp>
+<xmp>
+命令：btn         结果：<button></button>
+命令：btn：s        结果：<button type="submit"></button>
+命令：btn：r        结果：<button type="reset"></button>
+</xmp>
+CSS中缩写
+单位：
+p 表示%
+e 表示 em
+r表示 rem
+宽度：
+命令：w100   结果：width:100px; 默认单位px
+命令：w100p   结果：width:100%;  
+高度：
+ 命令：h100r   结果：height: 100rem;
+颜色：
+命令：c#3    结果： color: #333;
+命令：c#e0    结果： color: #e0e0e0;
+命令：c#fc0    结果： color: #ffcc00;
+CSS3前缀：
+w 表示 -webkit-
+m 表示 -moz-
+s 表示 -ms-
+o 表示 -o-
+命令：-wmso-transform  
+结果：
+-webkit-transform: ;
+-moz-transform: ;
+-ms-transform: ;
+-o-transform: ;
+transform: ;
+属性模糊匹配：
+如果有些缩写你拿不准，Emmet会根据你的输入内容匹配最接近的语法，比如输入ov:h、ov-h、ovh和oh，生成的代码是相同的： 
+所以在平时使用的时候可留意emmet的提示
+命令：h10p+m5e   结果：height: 10%;margin: 5em;
+</body>
+</html>
