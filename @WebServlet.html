@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+ 
+.aa{
+	
+	border:1px ;
+	width:1050px;
+	height:1070px;
+	margin-left:200px;
+	margin-top:50px;
+	
+}
+a{font-size:26px}
+</style>
+</head>
+<body background="31.jpg" style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed;" > 
+  <div class="aa"> 疑问:为什么输入大写的就显示正常而输入小写的就报错呢？而且也没有和上一篇博客写的在web.xml中配置ServletName等这些参数也能运行。这是什么原因呢？<br>
+  其实这主要是@WebServlet注解在起作用。Servlet3.0提供了注解(annotation)，使得不再需要在web.xml文件中进行Servlet的部署描述，简化开发流程。开发Servlet3的程序需要一定的环境支持。Servlet3是Java EE6规范的一部分，MyEclipse10和Tomcat7都提供了对Java EE6规范的支持。Tomcat需要Tomcat7才支持Java EE6，Tomcat7需要使用JDK6。关于注解以后有机会会专门写一博客来研究它，这里主要是@WebServlet注解的使用。
+  <br><br>
+  使用@WebServlet将一个继承于javax.servlet.http.HttpServlet的类定义为Servlet组件。
+@WebServlet有很多的属性：
+　　asyncSupported：声明Servlet是否支持异步操作模式。
+　　description：　　  Servlet的描述。
+　　displayName：     Servlet的显示名称。
+　　initParams：        Servlet的init参数。
+　   name：　　　　    Servlet的名称。
+　　urlPatterns：　　  Servlet的访问URL。
+　　value：　　　       Servlet的访问URL。
+　　Servlet的访问URL是Servlet的必选属性，可以选择使用urlPatterns或者value定义。<br><br>
+Servlet的参数配置:<br>
+使用@WebServlet注解来实现映射，不过要Servlet3.0以后才支持，在web.xml中配置是一比较常见的方式。还是以HelloWrold项目为demo，在web.xml中进行如下配置，也能达到@WebServlet注解的效果。配置在xml中的参数修改只需要重启下服务器就好，不用再修改Servlet类.
+<xmp>
+<servlet>
+      <servlet-name>HelloWorld</servlet-name>
+      <servlet-class>com.test.cyw.HelloWorld</servlet-class>
+      <init-param>
+          <param-name>encoding</param-name>
+          <param-value>UTF-8</param-value>
+      </init-param>
+      <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>HelloWorld</servlet-name>
+      <url-pattern>/helloWorld</url-pattern>
+      <url-pattern>/helloWorld.aspx</url-pattern>
+  </servlet-mapping>
+  </xmp>
+  
+<xmp>
+<servlet></servlet>是Servlet配置的开始和结束标记。
+<servlet-name>指定一个变量，主要是为了配置<servlet-mapping>时使用。
+<servlet-class>指定Servlet对应的类。
+<init-param></init-param>配置初始化参数开始结束标记。
+<param-name>参数名，主要是为以后获取提供name
+<param-value>参数值，设置初始化参数的值
+<servlet-mapping></servlet-mapping>Servlet映射关系配置开始结束标记，用户输入的url怎么找到对应的Servlet-Class就要靠它。
+<servlet-name>HelloWorld</servlet-name>与上面<Servlet>配置的<servlet-name>一致。
+<url-pattern>用户输入的url格式，可以使用通配符*或？。从javaee5开始可以配置多个，上面的代码中添加了一个后缀名为aspx的，这样也可以映射。
+</xmp>
+上下文的参数配置:<br>
+由于<xmp><init-param></xmp>是用配置在Servlet的参数，只能供对应的一个Servlet使用。要想配置的参数是全局的可以供所有的Servlet使用，可以使用上下文参数。例如像控制用户上传图片的类型，只允许用户上传jpg或png类型的图片。可以在web.xml中做下面的配置。
+<xmp>
+ <context-param>
+      <param-name>ImageType</param-name>
+      <param-value>.jpg,.png</param-value>
+  </context-param> </xmp>
+  
+</div>
+	
+ 
+</body>
+</html>
