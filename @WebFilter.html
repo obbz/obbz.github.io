@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+ 
+.aa{
+	
+	border:1px solid white;
+	width:1000px;
+	height:570px;
+	margin-left:200px;
+	margin-top:50px;
+}
+a{font-size:26px}
+</style>
+</head>
+<body background="31.jpg" style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed;" > 
+ <div class="aa">
+	 Filter译为过滤器，是JavaWeb的三大组件之一，用于在Servlet之外对Request或者Response进行修改。对于Web应用程序来说，过滤器是一个驻留在服务器端的Web组件，它可以截取客户端和服务器端之间的请求与响应信息。
+	<br> <br>
+	运行原理:<br>
+	Servlet是服务器端用于处理客户端的请求与响应的，而Filter就是介于客户端与服务器端拦截客户端的请求或服务器端的响应，并对其修改或过滤。
+	<br>
+	当客户端向服务器端发送一个请求时，如果有对应的过滤器进行拦截，过滤器可以改变请求的内容、或者重新设置请求协议的相关信息等，然后再将请求发送给服务器端的Servlet进行处理。当Servlet对客户端做出响应时，过滤器同样可以进行拦截，将响应内容进行修改或者重新设置后，再响应给客户端浏览器。在上述过程中，客户端与服务器端并不需要知道过滤器的存在。<br><br>
+	在一个Web应用程序中，可以部署多个过滤器进行拦截，这些过滤器组成了一个过滤器链。过滤器链中的每个过滤器负责特定的操作和任务，客户端的请求在这些过滤器之间传递，直到服务器端的Servlet。
+	<br><br><br>
+	在Servlet API中提供了一个Filter接口，实现过滤器只需要实现该接口即可。
+	<br><br>
+	生命周期 :<br>
+	Servlet API提供的Filter接口中含有三个方法，分别为init()、doFilter()和destroy()方法。该三个方式就是Filter的生命周期方法。
+Filter的构造函数
+在Tomcat服务器启动时执行。
+在Filter的生命周期中只执行一次。
+init(FilterConfig)方法 
+在Tomcat服务器启动时执行。
+在Filter的生命周期中只执行一次。
+用于Filter的初始化工作。
+doFilter(ServletRequest, ServletResponse, FilterChain)方法 
+在每次拦截时执行。
+在Filter的生命周期中只执行多次。
+用于Filter的拦截处理工作。
+destroy()方法 
+在Tomcat服务器关闭时执行。
+在Filter的生命周期中只执行一次。
+用于Filter的销毁工作。
+<br><br>
+过滤器链:<br>
+在一个Web应用程序中，可以部署多个过滤器进行拦截，这些过滤器组成了一个过滤器链。
+	</div>
+</body>
+</html>
