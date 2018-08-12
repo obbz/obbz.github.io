@@ -1,0 +1,111 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+ 
+.aa{
+	
+	border:1px solid white;
+	width:1020px;
+	height:2900px;
+	margin-left:150px;
+	margin-top:50px;
+	font-size:26px;
+}
+.bb{ 
+	border:1px solid white;
+	width:950px;
+	height:700px;
+	margin-left:70px; 
+	font-size:26px;
+	
+}
+.cc{ 
+	border:1px solid white;
+	width:950px;
+	height:1150px;
+	margin-left:70px; 
+	font-size:26px; 
+}
+.dd{ 
+	border:1px solid white;
+	width:950px;
+	height:940px;
+	margin-left:70px; 
+	font-size:26px; 
+}
+a{font-size:26px}
+</style>
+</head>
+<body background="31.jpg" style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed;" > 
+ <div class="aa"> 
+  1、学习并总结 StringBuffer/StringBuilder/String 的区别：<br>
+  <div class="bb">
+  运行速度：<br>
+  --运行速度快慢为：StringBuilder > StringBuffer > String。<br>
+  --String最慢的原因：String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。<br>
+  --Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。<br>
+  --而StringBuilder和StringBuffer的对象是变量，对变量进行操作就是直接对该对象进行更改，而不进行创建和回收的操作，所以速度要比String快很多。<br>
+  线程安全:<br>
+  --StringBuilder是线程不安全的，而StringBuffer是线程安全的。<br>
+  --如果一个StringBuffer对象在字符串缓冲区被多个线程使用时，StringBuffer中很多方法可以带有synchronized关键字，所以可以保证线程是安全的，但StringBuilder的方法则没有该关键字，所以不能保证线程安全，有可能会出现一些错误的操作。所以如果要进行的操作是多线程的，那么就要使用StringBuffer，但是在单线程的情况下，还是建议使用速度比较快的StringBuilder。<br><br>
+    --String：适用于少量的字符串操作的情况<br>
+--StringBuilder：适用于单线程下在字符缓冲区进行大量操作的情况<br>
+--StringBuffer：适用多线程下在字符缓冲区进行大量操作的情况
+  </div>
+  2、了解原生的 XMLHttpRequest 以及 FetchAPI 的使用
+  <div class="cc">
+  XMLHttpRequest 对象的重要属性：<br>
+（1）readyState存有XMLHttpRequest 的状态，0~4。<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;       0——请求未初始化<br>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  1——服务器连接已经建立<br>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  2——请求已接受<br>
+         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3——请求处理中<br>
+         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4——请求已完成，且响应已就绪。<br>
+（2）status，HTTP的特定状态码：<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 100-199：信息性的标示用户应该采取的其他动作。<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;200-299：表示请求成功。<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;300-399：用于那些已经移走的文件，常常包括Location报头，指出新的地址。<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 400-499：表明客户引发的错误。<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;500-599：由服务器引发的错误。<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+ 3）onreadystatechage:<br>
+　存储函数（或函数名）,每当readyState属性改变时，就会调用该函数
+XMLHttpRequest 对象的常用方法：<br>
+open(method,url,async)
+规定请求的类型,URL以及是否异步处理请求:<br>
+1.method:请求的类型:GET或POST<br>
+2.url：文件在服务器上的位置<br>
+3.async：true（异步）或false（同步）<br>
+send(string):<br>
+将请求发送到服务器。<br>
+string:仅用于POST请求，表示传递的参数，格式为key1=val1&key2=val2
+的查询字符串<br>
+setRequestHeader(header,value)
+向请求添加HTTP头:<br>
+header:规定头的名称<br>
+value:规定头的值<br>
+<br><br>
+FetchAPI 的使用:<br>
+使用Fetch创建一个简单的Get请求，将从Random User API获取的数据展示在网页上.
+ </div>
+  3、了解 HTTP 协议的基本知识，包括请求流程、请求方法等
+  <div class="dd">
+  基本知识:<br>--HTTP是超文本传输协议，其定义了客户端与服务器端之间文本传输的规范。HTTP默认使用80端口，这个端口指的是服务端的端口，而客户端使用的端口是动态分配的。当我们没有指定端口访问时，浏览器会默认帮我们添加80端口。我们也可以自己指定访问端口如：http://www.ip138.com:80。 需要注意的是，现在大多数访问都使用了HTTPS协议，而HTTPS的默认端口为443，如果使用80端口访问HTTPS协议的服务器可能会被拒绝。<br><br>
+  请求方法：<br>
+  --1）GET：HTTP协议中说明的GET方法是用来向服务器获取指定URL的资源的（请求报文的正文可能为空），然后服务器会将指定的资源附在应答报文的正文上返回。<br>
+--2）POST：HTTP协议中说明的POST方法是用来给服务器发送某些信息的，这些信息会被存放在请求报文的正文中。<br>
+--3）PUT：HTTP协议中说明的PUT方法是用来给服务器上传或者更新文件的，文件存放在请求报文的正文中，URL规定了文件在服务器存放的位置。<br>
+--3）DELETE：删除服务器中URL指定的资源。<br>
+--4）OPTIONS：返回服务器支持的HTTP方法。<br><br>
+请求流程:<br>
+比如你在浏览器中输入一个域名<br>
+1）DNS服务帮你解析该域名的IP地址（DNS使用UDP协议）。<br>
+2）系统帮你随机分配可用端口，TCP根据你的客户端端口，IP地址，服务器端口（默认80），3次握手建立连接。<br>
+3）浏览器发送你的HTTP请求报文，TCP依次往下层封装发送。<br>
+4）服务器发送HTTP响应报文。<br>
+5）浏览器得到响应报文后进行解析并显示。<br>
+  </div>
+</div>
+</body>
+</html>
